@@ -1,0 +1,27 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= @city.banner_url %>');">
+  <div class="container">
+    <h1><%= @city.name %> </h1>
+    <a class="btn btn-flat" href="#">Visit now</a>
+  </div>
+</div>
+
+<div class="container">
+  <%= link_to 'Edit', edit_city_path(@city), class: 'btn btn-secondary' %> |
+  <%= link_to 'Back', cities_path, class: 'btn btn-primary' %>
+
+
+  <%= simple_form_for [@city, @site] do |f| %>
+    <%= f.input :name %>
+    <%= f.input :image_url %>
+    <%= f.input :rating %>
+    <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
+</div>
+
+
+<% @city.sites.each do |site| %>
+  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= site.image_url %>')">
+    <%= site.name %>
+    <%= link_to "X", site_path(site), method: :delete %>
+  </div>
+<% end %>
